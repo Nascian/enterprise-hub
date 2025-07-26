@@ -1,0 +1,136 @@
+.min-h-screen {
+  min-height: 100vh;
+}
+.bg-background {
+  background-color: #f8fafc;
+}
+.text-foreground {
+  color: #22292f;
+}
+.card {
+  background: #fff;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+}
+.card-header {
+  margin-bottom: 1rem;
+}
+.card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+.card-content {
+  margin-top: 1rem;
+}
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.75em;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+.bg-success {
+  background: #22c55e;
+}
+.text-success-foreground {
+  color: #fff;
+}
+.bg-warning {
+  background: #facc15;
+}
+.text-warning-foreground {
+  color: #22292f;
+}
+.bg-primary {
+  background: #2563eb;
+}
+.text-primary-foreground {
+  color: #fff;
+}
+.bg-destructive {
+  background: #ef4444;
+}
+.text-destructive-foreground {
+  color: #fff;
+}
+.bg-muted {
+  background: #e5e7eb;
+}
+.text-muted-foreground {
+  color: #6b7280;
+}
+.input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  border: 1px solid #e5e7eb;
+}
+.select {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  border: 1px solid #e5e7eb;
+}
+.progress-container {
+  width: 100%;
+  background: #e5e7eb;
+  border-radius: 0.375rem;
+  height: 0.5rem;
+  overflow: hidden;
+}
+.progress-bar {
+  height: 100%;
+  background: #2563eb;
+  border-radius: 0.375rem;
+}
+.avatar {
+  border-radius: 9999px;
+  overflow: hidden;
+  display: inline-block;
+}
+.avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e5e7eb;
+  color: #6b7280;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+}
+.gradient-card {
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+}
+.shadow-enterprise {
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+}
+.hover\:shadow-primary:hover {
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.16);
+}
+.transition-smooth {
+  transition: box-shadow 0.2s ease;
+}
+.border-border\/50 {
+  border: 1px solid rgba(229, 231, 235, 0.5);
+}
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  background: #2563eb;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.btn-primary {
+  background: #2563eb;
+  color: #fff;
+}
+.btn-outline {
+  background: #fff;
+  color: #2563eb;
+  border: 1px solid #2563eb;
+}

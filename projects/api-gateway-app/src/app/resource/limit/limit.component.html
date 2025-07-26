@@ -1,0 +1,25 @@
+
+<div *ngIf="route.limit" class="grid grid-cols-1 gap-2">
+
+
+    <clr-input-container>
+      <label class="clr-control-label">Limit</label>
+      <input  [(ngModel)]="route.limit.limit"  clrInput type="text" placeholder="10000" name="limit" />
+    </clr-input-container>
+
+    <clr-input-container>
+        <label class="clr-control-label">Quota</label>
+        <input  [(ngModel)]="route.limit.quota" clrInput placeholder="1001" name="quota" />
+      </clr-input-container>
+
+      <clr-input-container>
+        <label class="clr-control-label">Refresh Interval</label>
+        <input  [(ngModel)]="route.limit.refreshInterval" clrInput placeholder="60" name="refreshInterval" />
+      </clr-input-container> 
+     
+      <clr-input-container>
+        <label class="clr-control-label">Type</label>
+        <input  [(ngModel)]="route.limit.type" clrInput placeholder="user" name="type" />
+      </clr-input-container>
+  
+  </div>

@@ -1,0 +1,117 @@
+<section class="container px-4 mx-auto ">
+
+
+  
+    <button (click)="addRoute()"  type="button" class="btn btn-icon btn-primary" aria-label="settings">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+    </button>
+    
+    <clr-datagrid class="z-0">
+
+        <clr-dg-column>Name</clr-dg-column>
+        <clr-dg-column>Path</clr-dg-column>
+        <clr-dg-column>Actions</clr-dg-column>
+  
+
+      
+        <clr-dg-row *clrDgItems="let route of routes; index as i">
+          
+          <clr-dg-cell>{{ route.name }}</clr-dg-cell>
+          <clr-dg-cell>{{ route.path }}</clr-dg-cell>
+          <clr-dg-cell>
+
+          <button (click)="selectDeleteRoute(route,i)"
+            class=" transition duration-200 ease-in-out hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"  class="w-4 h-6 mr-2 text-blue-500">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />    
+            </svg>
+          </button>
+
+          <button (click)="selectRoute(route)" 
+          class=" transition duration-200 ease-in-out hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"  class="w-4 h-6 mr-2 text-blue-500">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+          </svg>
+        </button>
+
+        <button (click)="selectLimitRoute(route)" 
+        class=" transition duration-200 ease-in-out hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"  class="w-4 h-6 mr-2 text-blue-500">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
+        </svg>
+      </button>
+
+          
+
+
+          </clr-dg-cell>
+         
+        </clr-dg-row>
+      
+        <clr-dg-footer>
+            <clr-dg-pagination #pagination [clrDgPageSize]="10">
+              <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]">Routes per page</clr-dg-page-size>
+              {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of
+              {{ pagination.totalItems }} routes
+            </clr-dg-pagination>
+          </clr-dg-footer>
+       
+      </clr-datagrid>
+    
+</section>
+
+
+  <!-- component -->
+  <div class="flex justify-center items-center">
+    
+    
+    <clr-side-panel [(clrSidePanelOpen)]="opened" [clrSidePanelSize]="'sm'" >
+      <h3 class="side-panel-title">{{action}} Route</h3>
+      <div *ngIf="currentRoute" class="side-panel-body">
+
+        <app-route [route]="currentRoute"></app-route>
+      
+      </div>
+      <div class="side-panel-footer">
+        <button type="button" class="btn btn-outline" (click)="opened = false">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="onSaveOk()">Ok</button>
+      </div>
+    </clr-side-panel>
+
+    <clr-side-panel [(clrSidePanelOpen)]="limitOpened" [clrSidePanelSize]="'sm'" >
+        <h3 class="side-panel-title">{{action}} Route</h3>
+        <div *ngIf="currentRoute" class="side-panel-body">
+  
+          <app-limit [route]="currentRoute"></app-limit>
+        
+        </div>
+        <div class="side-panel-footer">
+          <button type="button" class="btn btn-outline" (click)="limitOpened = false">Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="onSaveOk()">Ok</button>
+        </div>
+      </clr-side-panel>
+
+   
+    <clr-modal [(clrModalOpen)]="showConfirm">
+        <h3 class="modal-title">Are you sure?</h3>
+        <div class="modal-body">
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" (click)="showConfirm = false">Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="onSaveConfirmOk()">
+            Yes
+          </button>
+        </div>
+      </clr-modal>
+    
+</div>
+
+
+
+    
+
+
+  

@@ -1,0 +1,91 @@
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
+    <!-- Contenedor principal del cuadro de diálogo -->
+    <div class="relative bg-gray-900 text-white w-3/4 md:w-1/2 p-4 rounded-lg shadow-lg border-4 border-gray-300">
+      <!-- Icono de Navi (puedes usar una imagen o un ícono SVG) -->
+      <div class="absolute -top-8 -left-5">
+
+        <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 200 200" class="w-12 h-12 animate-bounce text-gray-300">
+            <style>
+              /* Animación de expansión y contracción de alas */
+              @keyframes wingFlap {
+                0% {
+                  transform: scale(1);
+                }
+                50% {
+                  transform: scale(1.01);
+                }
+                100% {
+                  transform: scale(1);
+                }
+              }
+      
+              /* Animación de destellos de luz en el cuerpo */
+              @keyframes lightGlows {
+                0% {
+                  opacity: 0.5;
+                }
+                50% {
+                  opacity: 1;
+                }
+                100% {
+                  opacity: 0.5;
+                }
+              }
+      
+              /* Animación y estilo para las alas */
+              .left-wing, .right-wing {
+                animation: wingFlap 1.5s infinite ease-in-out;
+                transform-origin: 100% 100%;
+                stroke: #a3d9ff; /* Azul pastel */
+              }
+      
+              /* Detalles de las alas */
+              .wing-detail {
+                animation: wingFlap 1.5s infinite ease-in-out;
+                transform-origin: 100% 100%;
+                stroke: #b0e4d4;
+                stroke-opacity: 0.8;
+              }
+      
+              /* Animación de destellos en el punto central */
+              .light {
+                animation: lightGlows 1s infinite ease-in-out;
+                fill: #3f89ff;
+              }
+            </style>
+      
+            <!-- Punto central (cuerpo inanimado) con destellos -->
+            <circle cx="100" cy="100" r="15" class="light" />
+      
+            <!-- Alas: lado izquierdo -->
+            <path class="left-wing" d="M100,100 L60,60" stroke-width="3" fill="none" />
+            <line class="left-wing" x1="100" y1="100" x2="60" y2="60" stroke-width="3" />
+            <line class="wing-detail" x1="100" y1="100" x2="70" y2="80" stroke-width="2" />
+            <line class="wing-detail" x1="100" y1="100" x2="50" y2="85" stroke-width="2" />
+            <line class="wing-detail" x1="100" y1="100" x2="75" y2="50" stroke-width="1" />
+            <line class="wing-detail" x1="100" y1="100" x2="65" y2="40" stroke-width="1" />
+      
+            <!-- Alas: lado derecho -->
+            <path class="right-wing" d="M100,100 L140,60" stroke-width="3" fill="none" />
+            <line class="right-wing" x1="100" y1="100" x2="140" y2="60" stroke-width="3" />
+            <line class="wing-detail" x1="100" y1="100" x2="130" y2="50" stroke-width="2" />
+            <line class="wing-detail" x1="100" y1="100" x2="150" y2="70" stroke-width="2" />
+            <line class="wing-detail" x1="100" y1="100" x2="120" y2="45" stroke-width="1" />
+            <line class="wing-detail" x1="100" y1="100" x2="135" y2="40" stroke-width="1" />
+          </svg>
+
+
+      </div>
+      <!-- Texto del cuadro -->
+      <p class="text-lg text-white leading-relaxed">
+        "Hey! Listen! <br /> You can adjust the settings by clicking the gear icon in the top right corner."
+      </p>
+      <!-- Botón para continuar -->
+      <div class="flex justify-end mt-4">
+        <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg shadow-md">
+          Continue
+        </button>
+      </div>
+    </div>
+  </div>
+  

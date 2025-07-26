@@ -1,0 +1,25 @@
+
+<div *ngIf="route" class="grid grid-cols-1 gap-2">
+
+
+    <clr-input-container>
+      <label class="clr-control-label">Name</label>
+      <input [disabled]="!isEditable" [(ngModel)]="route.name"  clrInput type="text" placeholder="Name" name="name" />
+    </clr-input-container>
+
+    <clr-input-container>
+        <label class="clr-control-label">Path</label>
+        <input  [(ngModel)]="route.path" clrInput placeholder="/service/xx/**" name="path" />
+      </clr-input-container>
+
+      <clr-input-container>
+        <label class="clr-control-label">Url</label>
+        <input  [(ngModel)]="route.url" clrInput placeholder="https://localhost/path" name="url" />
+      </clr-input-container> 
+     
+      <clr-input-container>
+        <label class="clr-control-label">Permissions</label>
+        <input  [(ngModel)]="route.permissions" clrInput placeholder="Admin;User" name="permissions" />
+      </clr-input-container>
+  
+  </div>

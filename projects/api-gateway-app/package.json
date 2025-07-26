@@ -1,0 +1,18 @@
+{
+    "name": "@tccprueabaarturo/api-gateway-app",
+    "version": "1.0.3",
+    "main": "bundles/api-gateway-app.umd.js",
+    "module": "fesm2015/api-gateway-app.js",
+    "es2015": "fesm2015/api-gateway-app.js",
+    "typings": "api-gateway-app.d.ts",
+    "scripts": {
+        "build": "cd ..\\..\\ && ng build api-gateway-app",
+        "publish": "npm version patch && copy package.json ..\\..\\dist\\api-gateway-app\\package.json && npm publish --access public ..\\..\\dist\\api-gateway-app\\"
+    },
+    "sideEffects": false,
+    "peerDependencies": {
+        "@angular/core": "^14.0.0",
+        "@angular/common": "^14.0.0",
+        "@angular/router": "^14.0.0"
+    }
+}

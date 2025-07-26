@@ -1,0 +1,18 @@
+{
+    "name": "@tccprueabaarturo/login-app",
+    "version": "1.0.16",
+    "main": "bundles/login-app.umd.js",
+    "module": "fesm2015/login-app.js",
+    "es2015": "fesm2015/login-app.js",
+    "typings": "login-app.d.ts",
+    "scripts": {
+        "build": "cd ..\\..\\ && ng build login-app",
+        "publish": "npm version patch && copy package.json ..\\..\\dist\\login-app\\package.json && npm publish --access public ..\\..\\dist\\login-app\\"
+    },
+    "sideEffects": false,
+    "peerDependencies": {
+        "@angular/core": "^14.0.0",
+        "@angular/common": "^14.0.0",
+        "@angular/router": "^14.0.0"
+    }
+}

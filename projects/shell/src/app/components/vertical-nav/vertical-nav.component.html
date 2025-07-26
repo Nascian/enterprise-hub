@@ -1,0 +1,22 @@
+<clr-vertical-nav [clrVerticalNavCollapsible]="collapsible">
+    <!-- Use *ngFor to iterate over menu items -->
+    <clr-vertical-nav-group *ngFor="let item of menu" routerLinkActive="active">
+      <!-- Hidden router link for active state -->
+      <a  hidden aria-hidden="true"></a>
+
+      <!-- Icon and title -->
+ 
+      {{ item.title }}
+
+      <clr-vertical-nav-group-children *clrIfExpanded>
+        <!-- Inner *ngFor to iterate over children -->
+        <a clrVerticalNavLink *ngFor="let child of item.children" routerLink="home"  (click)="navigateToUrl(child)"
+          routerLinkActive="active">
+          {{ child.title }}
+        </a>
+      </clr-vertical-nav-group-children>
+    </clr-vertical-nav-group>
+
+    <div class="nav-divider"></div>
+    <a clrVerticalNavLink routerLink="./home" routerLinkActive="active">Home</a>
+  </clr-vertical-nav>

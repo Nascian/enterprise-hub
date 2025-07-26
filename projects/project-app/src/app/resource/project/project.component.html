@@ -1,0 +1,182 @@
+ <div class="min-h-screen bg-background">
+ 
+        
+        <main class="flex-1 p-6">
+          <div class="space-y-6">
+            <!-- Header -->
+            <div class="flex justify-between items-center">
+              <h1 class="text-3xl font-bold text-foreground">Proyectos</h1>
+              <button class="btn btn-primary" (click)="createNewProject()">
+                <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                </svg>
+                Nuevo Proyecto
+              </button>
+            </div>
+
+            <!-- Filters -->
+            <div class="flex flex-col md:flex-row gap-4">
+              <div class="flex-1 relative">
+                <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" 
+                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                        d="m21 21-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z"></path>
+                </svg>
+                <input
+                  type="text"
+                  placeholder="Buscar proyectos..."
+                  [(ngModel)]="searchTerm"
+                  class="input pl-10"
+                />
+              </div>
+              
+              <select [(ngModel)]="statusFilter" class="select w-[180px]">
+                <option value="all">Todos los estados</option>
+                <option value="active">Activo</option>
+                <option value="planning">Planificación</option>
+                <option value="completed">Completado</option>
+                <option value="delayed">Retrasado</option>
+              </select>
+              
+              <select [(ngModel)]="priorityFilter" class="select w-[180px]">
+                <option value="all">Todas las prioridades</option>
+                <option value="high">Alta</option>
+                <option value="medium">Media</option>
+                <option value="low">Baja</option>
+              </select>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div 
+                *ngFor="let project of filteredProjects" 
+                class="card gradient-card border-border/50 shadow-enterprise hover:shadow-primary transition-smooth"
+              >
+                <div class="card-header space-y-2">
+                  <div class="flex justify-between items-start">
+                    <h3 class="card-title text-lg font-semibold text-foreground line-clamp-1">
+                      {{ project.name }}
+                    </h3>
+                    <div class="flex gap-2">
+                      <span [class]="'badge ' + getStatusColor(project.status)">
+                        {{ project.status }}
+                      </span>
+                      <span [class]="'badge ' + getPriorityColor(project.priority)">
+                        {{ project.priority }}
+                      </span>
+                    </div>
+                  </div>
+                  <p class="text-sm text-muted-foreground line-clamp-2">
+                    {{ project.description }}
+                  </p>
+                </div>
+                
+                <div class="card-content space-y-4">
+                  <!-- Progress -->
+                  <div class="space-y-2">
+                    <div class="flex justify-between text-sm">
+                      <span class="text-muted-foreground">Progreso</span>
+                      <span class="font-medium text-foreground">{{ project.progress }}%</span>
+                    </div>
+                    <div class="progress-container">
+                      <div 
+                        class="progress-bar" 
+                        [style.width.%]="project.progress"
+                      ></div>
+                    </div>
+                  </div>
+
+                  <!-- Stats -->
+                  <div class="grid grid-cols-2 gap-4 text-sm">
+                    <div class="flex items-center gap-2">
+                      <svg class="h-4 w-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                      </svg>
+                      <span class="text-muted-foreground">Entrega:</span>
+                      <span class="font-medium text-foreground">{{ project.dueDate }}</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <svg class="h-4 w-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"></path>
+                      </svg>
+                      <span class="text-muted-foreground">Equipo:</span>
+                      <span class="font-medium text-foreground">{{ project.teamSize }}</span>
+                    </div>
+                  </div>
+
+                  <!-- Tasks Progress -->
+                  <div class="flex justify-between text-sm">
+                    <span class="text-muted-foreground">Tareas:</span>
+                    <span class="font-medium text-foreground">
+                      {{ project.tasksCompleted }} / {{ project.totalTasks }}
+                    </span>
+                  </div>
+
+                  <!-- Team Members -->
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm text-muted-foreground">Equipo:</span>
+                    <div class="flex -space-x-2">
+                      <div 
+                        *ngFor="let member of project.teamMembers.slice(0, 3)"
+                        class="avatar w-6 h-6 border-2 border-background"
+                      >
+                        <img 
+                          *ngIf="member.avatar" 
+                          [src]="member.avatar" 
+                          [alt]="member.initials"
+                          class="w-full h-full rounded-full object-cover"
+                        />
+                        <span 
+                          *ngIf="!member.avatar" 
+                          class="avatar-fallback text-xs"
+                        >
+                          {{ member.initials }}
+                        </span>
+                      </div>
+                      <div 
+                        *ngIf="project.teamMembers.length > 3"
+                        class="w-6 h-6 rounded-full bg-muted border-2 border-background flex items-center justify-center"
+                      >
+                        <span class="text-xs text-muted-foreground">
+                          +{{ project.teamMembers.length - 3 }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Actions -->
+                  <div class="flex gap-2 pt-2">
+                    <button 
+                      class="btn btn-outline flex-1" 
+                      (click)="viewProjectDetails(project)"
+                    >
+                      Ver Detalles
+                    </button>
+                    <button 
+                      class="btn btn-outline"
+                      (click)="viewProjectStats(project)"
+                    >
+                      <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- No Results -->
+            <div 
+              *ngIf="filteredProjects.length === 0" 
+              class="text-center py-12"
+            >
+              <p class="text-muted-foreground">
+                No se encontraron proyectos que coincidan con los filtros.
+              </p>
+            </div>
+          </div>
+        </main>
+    </div>

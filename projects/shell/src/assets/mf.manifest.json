@@ -1,0 +1,7 @@
+{
+	
+	"loginApp": "http://localhost:4202/remoteEntry.js",
+	"projectApp": "http://localhost:4204/remoteEntry.js",
+	"analyticsApp": "http://localhost:4206/remoteEntry.js"
+
+}	

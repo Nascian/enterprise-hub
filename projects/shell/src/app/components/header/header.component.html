@@ -1,0 +1,108 @@
+<header *ngIf="isAuthenticated()" class="header-6 bg-gray-800">
+
+
+    
+
+  <div class="flex flex-shrink-0 items-center ml-auto">
+
+
+
+    <div class="flex items-center">
+
+
+      <button id="menu__btn" (click)="toggleMenu()" class="flex items-center transition duration-200 efocus:outline-none focus:ring-2 focus:ring-blue-400 p-1">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2 stroke-blue-500">
+          <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />   
+             </svg>
+      </button>
+
+
+      <!-- ... -->
+
+          <button class="nav-text" [routerLink]="['/home']">
+            Enterprise Hub       
+          </button>
+    </div>
+
+
+
+
+
+    <aside [class.active]="isActive" class="menu__box" aria-label="Sidebar">
+
+     
+
+      <div class="grid grid-cols-2 py-2">
+
+
+        
+
+        <button id="menu__btn" (click)="toggleMenu()" class="flex items-center transition focus:outline-none focus:ring-2 focus:ring-blue-400 p-1">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4b5563" class="w-4 h-4 mr-2">
+            <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />   
+               </svg>
+        </button>
+  
+
+      </div>
+
+      <clr-tree>
+        <clr-tree-node *ngFor="let directory of rootDirectory" [(clrExpanded)]="directory.expanded">
+          <cds-icon [attr.shape]="directory.icon"></cds-icon>
+          {{ directory.name }}
+          <clr-tree-node *ngFor="let file of directory.files">
+            <button
+              (click)="openFile(file.url); isActive=false;"
+              class="clr-treenode-link"
+              [class.active]="file.active"
+            >
+              <cds-icon [attr.shape]="file.icon"></cds-icon>
+              {{ file.name }}
+            </button>
+          </clr-tree-node>
+        </clr-tree-node>
+      </clr-tree>
+
+
+      
+
+    </aside>
+
+
+
+  </div>
+
+  <div class="header-actions">
+    <clr-dropdown>
+      <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
+        soporte@tccprueabaarturo.co
+        <cds-icon shape="angle" direction="down"></cds-icon>
+      </button>
+      <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+        <a href="..." clrDropdownItem>Preferences</a>
+        <a href="..." (click)="onLogout()" clrDropdownItem>Log out</a>
+      </clr-dropdown-menu>
+    </clr-dropdown>
+  </div>
+</header>
+<!--
+<nav class="subnav">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link active" href="javascript://">Subnav Link 1</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="javascript://">Subnav Link 2</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="javascript://">Subnav Link 3</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="javascript://">Subnav Link 4</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="javascript://">Subnav Link 5</a>
+    </li>
+  </ul>
+</nav>
+-->
